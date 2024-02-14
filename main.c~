@@ -1,0 +1,16 @@
+#include "main.h"
+
+/**
+ * main - executes a shell
+ **/
+
+int main()
+{
+	char *ptr;
+
+	ptr = _prompt();
+	if (ptr == NULL)
+		printf("failed to read command");
+
+	return (0);
+}
