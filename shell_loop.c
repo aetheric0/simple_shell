@@ -12,18 +12,18 @@ void _shell_loop(void)
 	char *args[] = {NULL};
 	char *const env[] = {"PATH=/bin", NULL};
 
-	my_pid = fork();
 	do
 	{
-		while (my_pid == 0)
+		my_pid = fork();
+		if (my_pid == 0)
 		{
 			ptr = _prompt();
 			ptr[strcspn(ptr, "\n")] = '\0';
 			if ((execve(ptr, args, env)) == -1)
 				perror("./hsh");
 		}
-		waitpid(my_pid, &wstatus, WUNTRACED);
-	}while (WIFEXITED(wstatus) && WIFSIGNALED(wstatus));
+
+	}while (waitpid(my_pid, &wstatus, WUNTRACED));
 
 	free(ptr);
 }
