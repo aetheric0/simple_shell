@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stddef.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
 char * _prompt(void);
 void _shell_loop(void);

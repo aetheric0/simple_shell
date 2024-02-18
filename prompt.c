@@ -18,7 +18,10 @@ char * _prompt(void)
 	printf("$ ");
 	text_size = getline(&lineptr, &n, stream);
 	if (text_size == -1)
+	{
 		return (NULL);
+		perror("getline");
+	}
 
 	return (lineptr);
 }

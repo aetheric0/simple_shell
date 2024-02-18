@@ -9,10 +9,13 @@ int main(int argc, char *argv[])
 	pid_t my_pid;
 	char *const env[] = {"PATH=/bin", NULL};
 
+	/* Interactive Shell */
 	if (argc == 1)
 	{
 		_shell_loop();
 	}
+
+	/* Non-Interactive Mode */
 	else
 	{
 		my_pid = fork();
