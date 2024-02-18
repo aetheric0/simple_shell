@@ -7,6 +7,7 @@
 int main(int argc, char *argv[])
 {
 	pid_t my_pid;
+	int wstatus;
 	char *const env[] = {"PATH=/bin", NULL};
 
 	/* Interactive Shell */
@@ -24,6 +25,7 @@ int main(int argc, char *argv[])
 			if (execve(argv[0], argv, env) == -1)
 				perror("./hsh");
 		}
+		waitpid(my_pid, &wstatus, 0);
 	}
 
 	return (0);
