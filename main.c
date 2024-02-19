@@ -4,30 +4,29 @@
  * main - executes a shell
  **/
 
-int main()
+int main(int argc, char *argv[])
 {
 	pid_t my_pid;
-	char *ptr = "initializer";
+	int wstatus;
 	char *const env[] = {"PATH=/bin", NULL};
-	char *const args[] = {NULL};
 
-	do
+	/* Interactive Shell */
+	if (argc == 1)
 	{
-		ptr = _prompt();
+		_shell_loop();
+	}
+
+	/* Non-Interactive Mode */
+	else
+	{
 		my_pid = fork();
 		if (my_pid == 0)
 		{
-			if (execve(ptr, args, env) == -1)
-			{
-				perror("hsh");
-				exit(EXIT_FAILURE);
-			}
-			else if (my_pid < 0)
-				perror("forking failed");
+			if (execve(argv[0], argv, env) == -1)
+				perror("./hsh");
 		}
-	}while (strcmp(ptr, "exit"));
-
-	free(ptr);
+		waitpid(my_pid, &wstatus, 0);
+	}
 
 	return (0);
 }

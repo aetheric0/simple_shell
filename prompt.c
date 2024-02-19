@@ -19,10 +19,8 @@ char * _prompt(void)
 	text_size = getline(&lineptr, &n, stream);
 	if (text_size == -1)
 	{
-		if (feof(stdin))
-			exit(EXIT_SUCCESS);
-		else
-			exit(EXIT_FAILURE);
+		return (NULL);
+		perror("./hsh");
 	}
 	lineptr[strcspn(lineptr, "\n")] = '\0';
 
