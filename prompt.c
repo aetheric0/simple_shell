@@ -20,8 +20,9 @@ char * _prompt(void)
 	if (text_size == -1)
 	{
 		return (NULL);
-		perror("getline");
+		perror("./hsh");
 	}
+	lineptr[strcspn(lineptr, "\n")] = '\0';
 
 	return (lineptr);
 }
