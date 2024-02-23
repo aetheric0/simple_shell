@@ -1,13 +1,16 @@
 #include "main.h"
 
 /**
- * main - executes a shell
+ * main - executes an interactive or non-interactive shell if command is piped.
+ * @argc: argument count for non-interactive shell
+ * @argv: argument vector for non-interactive shell
+ * Return: 0 (Success!)
  **/
 
 int main(int argc, char *argv[])
 {
 	pid_t my_pid;
-	int wstatus;
+	/* int wstatus; */
 	char *const env[] = {"PATH=/bin", NULL};
 
 	/* Interactive Shell */
@@ -25,7 +28,7 @@ int main(int argc, char *argv[])
 			if (execve(argv[0], argv, env) == -1)
 				perror("./hsh");
 		}
-		waitpid(my_pid, &wstatus, 0);
+		exit(EXIT_SUCCESS);
 	}
 
 	return (0);

@@ -8,7 +8,7 @@
  * Return: 0 (Success!), -1 on failure
  **/
 
-char * _prompt(void)
+char *_prompt(void)
 {
 	ssize_t text_size;
 	FILE *stream = stdin;
