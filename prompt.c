@@ -14,6 +14,7 @@ char *_prompt(void)
 	FILE *stream = stdin;
 	char *lineptr = NULL;
 	size_t n = 0;
+	struct stat st;
 
 	printf("$ ");
 	text_size = getline(&lineptr, &n, stream);
@@ -23,6 +24,13 @@ char *_prompt(void)
 		perror("./hsh");
 	}
 	lineptr[strcspn(lineptr, "\n")] = '\0';
+
+	if (stat(lineptr, &st) == -1)
+	{
+		perror("hsh");
+		free(lineptr);
+		exit(EXIT_FAILURE);
+	}
 
 	return (lineptr);
 }

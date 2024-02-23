@@ -24,7 +24,7 @@ char **_tokens(void)
 	tokens = (char **)malloc((sizeof(char *) * string_count) + 1);
 	if (tokens == NULL)
 	{
-		printf("hsh: malloc failed to allocate mem");
+		perror("hsh");
 		exit(EXIT_FAILURE);
 	}
 
@@ -34,7 +34,7 @@ char **_tokens(void)
 		tokens[pos] = malloc(strlen(token) + 1);
 		if (tokens[pos] == NULL)
 		{
-			printf("malloc failed to allocate mem for token");
+			perror("hsh");
 			exit(EXIT_FAILURE);
 		}
 		strcpy(tokens[pos], token);
