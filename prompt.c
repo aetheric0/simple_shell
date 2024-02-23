@@ -8,7 +8,7 @@
  * Return: 0 (Success!), -1 on failure
  **/
 
-char * _prompt(void)
+char *_prompt(void)
 {
 	ssize_t text_size;
 	FILE *stream = stdin;
@@ -22,7 +22,9 @@ char * _prompt(void)
 		return (NULL);
 		perror("./hsh");
 	}
+
 	lineptr[strcspn(lineptr, "\n")] = '\0';
 
-	return (lineptr);
+	return(lineptr);
+
 }
