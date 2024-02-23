@@ -21,7 +21,7 @@ char **_tokens(void)
 		if (string[i] == ' ')
 			string_count++;
 	}
-	tokens = (char **)malloc((sizeof(char *) * string_count) + 1);
+	tokens = (char **)malloc(sizeof(char *) * (string_count + 1));
 	if (tokens == NULL)
 	{
 		perror("hsh");
