@@ -48,6 +48,7 @@ char **_tokens(char **env)
 
 /**
  * null_checker - handles failed malloc call
+ * @s: pointer memory to be freed
  **/
 
 void null_checker(char *s)
