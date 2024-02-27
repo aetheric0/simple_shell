@@ -23,11 +23,10 @@ int main(int ac, char **av, char **env)
 
 void printenv(char **env)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; env[i] != NULL; i++)
-	{
-		printf("%s", env[i]);
-	}
+		write(STDOUT_FILENO, env[i], _strlen(env[i]));
+	write(STDOUT_FILENO, "\n", 1);
 
 }
