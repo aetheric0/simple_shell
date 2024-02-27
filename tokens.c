@@ -34,7 +34,7 @@ char **_tokens(char **env)
 	token = strtok(string, " ");
 	while (token != NULL)
 	{
-		tokens[pos] = (char *)malloc(strlen(token) + 1);
+		tokens[pos] = (char *)malloc(_strlen(token) + 1);
 		if (tokens[pos] == NULL)
 			null_checker(tokens[pos]);
 		strcpy(tokens[pos], token);

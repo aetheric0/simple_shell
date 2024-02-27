@@ -19,10 +19,10 @@ char *_prompt(char **env)
 		write(1, "\n", 1);
 		exit(EXIT_SUCCESS);
 	}
-	lineptr[strcspn(lineptr, "\n")] = '\0';
-	if (strcmp(lineptr, "env") == 0 || strcmp(lineptr, "printenv") == 0)
+	lineptr[_strcspsn(lineptr, '\n')] = '\0';
+	if (_strcmp(lineptr, "env") == 0 || _strcmp(lineptr, "printenv") == 0)
 		printenv(env);
-	if (strcmp(lineptr, "exit") == 0)
+	if (_strcmp(lineptr, "exit") == 0)
 		exit(EXIT_SUCCESS);
 	return (lineptr);
 }
@@ -34,6 +34,6 @@ char *_prompt(char **env)
 
 void sigint_handler(int signum)
 {
-	printf("\n");
+	write(STDOUT_FILENO, "\n", 1);
 	exit(EXIT_SUCCESS);
 }

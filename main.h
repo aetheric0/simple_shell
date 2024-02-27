@@ -20,4 +20,9 @@ void _free(char **);
 void sigint_handler(int);
 void null_checker(char *);
 
+/* String handlers */
+int _strlen(char *);
+int _strcmp(char *, char *);
+int _strcspsn(char *, char);
+
 #endif
