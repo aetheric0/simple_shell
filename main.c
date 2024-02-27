@@ -2,34 +2,32 @@
 
 /**
  * main - executes an interactive or non-interactive shell if command is piped.
- * @argc: argument count for non-interactive shell
- * @argv: argument vector for non-interactive shell
+ * @ac: argument count for non-interactive shell
+ * @av: argument vector for non-interactive shell
+ * @env: shell environment macro
  * Return: 0 (Success!)
  **/
 
-int main(int argc, char *argv[])
+int main(int ac, char **av, char **env)
 {
-	pid_t my_pid;
-	/* int wstatus; */
-	char *const env[] = {"PATH=/bin", NULL};
-
-	/* Interactive Shell */
-	if (argc == 1)
-	{
-		_shell_loop();
-	}
-
-	/* Non-Interactive Mode */
-	else
-	{
-		my_pid = fork();
-		if (my_pid == 0)
-		{
-			if (execve(argv[0], argv, env) == -1)
-				perror("./hsh");
-		}
-		exit(EXIT_SUCCESS);
-	}
+	signal(SIGINT, sigint_handler);
+	_shell_loop(env);
 
 	return (0);
+}
+
+/**
+ * printenv - prints shell environment variable
+ * @env: shell environment macro
+ **/
+
+void printenv(char **env)
+{
+	int i;
+
+	for (i = 0; env[i] != NULL; i++)
+	{
+		printf("%s", env[i]);
+	}
+
 }

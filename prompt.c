@@ -1,30 +1,39 @@
 #include "main.h"
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 
 /**
  * _prompt - prints $ and waits for user input
- * Return: 0 (Success!), -1 on failure
+ * @env: shell environment macro
+ * Return: pointer to string from getline
  **/
 
-char *_prompt(void)
+char *_prompt(char **env)
 {
-	ssize_t text_size;
 	FILE *stream = stdin;
 	char *lineptr = NULL;
 	size_t n = 0;
 
-	printf("$ ");
-	text_size = getline(&lineptr, &n, stream);
-	if (text_size == -1)
+	write(STDOUT_FILENO, "$ ", 2);
+	if (getline(&lineptr, &n, stream) == -1)
 	{
-		return (NULL);
-		perror("./hsh");
+		free(lineptr);
+		write(1, "\n", 1);
+		exit(EXIT_SUCCESS);
 	}
-
 	lineptr[strcspn(lineptr, "\n")] = '\0';
+	if (strcmp(lineptr, "env") == 0 || strcmp(lineptr, "printenv") == 0)
+		printenv(env);
+	if (strcmp(lineptr, "exit") == 0)
+		exit(EXIT_SUCCESS);
+	return (lineptr);
+}
 
-	return(lineptr);
+/**
+ * sigint_handler - frees memory when SIGINT is received
+ * @signum: num for signal interruption
+ **/
 
+void sigint_handler(int signum)
+{
+	printf("\n");
+	exit(EXIT_SUCCESS);
 }
