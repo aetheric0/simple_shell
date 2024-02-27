@@ -3,6 +3,7 @@
 /**
  * _tokens - stores each string separately in an
  * array by getting rid of delimiters
+ * @env: environment macro
  * Return: pointer to array of strings
  **/
 
@@ -28,22 +29,14 @@ char **_tokens(char **env)
 	}
 	tokens = (char **)malloc(sizeof(char *) * (string_count + 1));
 	if (tokens == NULL)
-	{
-		perror("hsh");
-		free(string);
-		exit(EXIT_FAILURE);
-	}
+		null_checker(string);
 
 	token = strtok(string, " ");
 	while (token != NULL)
 	{
 		tokens[pos] = (char *)malloc(strlen(token) + 1);
 		if (tokens[pos] == NULL)
-		{
-			perror("hsh");
-			free(tokens[pos]);
-			exit(EXIT_FAILURE);
-		}
+			null_checker(tokens[pos]);
 		strcpy(tokens[pos], token);
 		pos++;
 		token = strtok(NULL, " ");
@@ -51,4 +44,15 @@ char **_tokens(char **env)
 	tokens[pos] = NULL;
 	free(string);
 	return (tokens);
+}
+
+/**
+ * null_checker - handles failed malloc call
+ **/
+
+void null_checker(char *s)
+{
+	perror("hsh");
+	free(s);
+	exit(EXIT_FAILURE);
 }

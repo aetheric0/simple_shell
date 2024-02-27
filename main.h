@@ -18,5 +18,6 @@ void printenv(char **);
 void process(char **, struct stat);
 void _free(char **);
 void sigint_handler(int);
+void null_checker(char *);
 
 #endif
