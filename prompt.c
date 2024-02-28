@@ -23,9 +23,9 @@ char *_prompt(char **env)
 		exit(EXIT_SUCCESS);
 	}
 	lineptr[_strcspsn(lineptr, '\n')] = '\0';
-	if (_strcmp(lineptr, "env") == 0 || _strcmp(lineptr, "printenv") == 0)
+	if (strcmp(lineptr, "env") == 0 || strcmp(lineptr, "printenv") == 0)
 		printenv(env);
-	if (_strcmp(lineptr, "exit") == 0)
+	if (strcmp(lineptr, "exit") == 0)
 		exit(EXIT_SUCCESS);
 	return (lineptr);
 }

@@ -28,25 +28,14 @@ int _strlen(char *s)
 
 int _strcmp(char *s1, char *s2)
 {
-	int i, j, res;
+	int i;
 
-	j = 0;
-	while (s1[j] != '\0')
-		j++;
-	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
+	for (i = 0; s1[i] == s2[i] && s1[i]; i++)
 	{
 		if (s1[i] != s2[i])
-		{
-			res = s1[i] - s2[i];
-			break;
-		}
-		else if (s1[i] == s2[i])
-		{
-			res = 0;
-		}
+			return (-1);
+		return (0);
 	}
-
-	return (res);
 }
 
 /**

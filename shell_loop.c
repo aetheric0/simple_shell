@@ -27,12 +27,15 @@ void _shell_loop(char **env)
 		}
 		else
 		{
-			if (_strcmp(ptr[0], "env") == 0
-			    || _strcmp(ptr[0], "printenv") == 0)
+			if (ptr != NULL && ptr[0] != NULL)
 			{
-				continue;
+				if (strcmp(ptr[0], "env") == 0
+				    || strcmp(ptr[0], "printenv") == 0)
+				{
+					continue;
+				}
+				perror("./hsh");
 			}
-			perror("./hsh");
 		}
 
 		_free(ptr);
