@@ -37,5 +37,5 @@ char *_prompt(char **env)
 
 void sigint_handler(int signum)
 {
-	exit(EXIT_SUCCESS);
+	exit(signum);
 }
