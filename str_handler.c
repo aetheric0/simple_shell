@@ -49,9 +49,11 @@ int _strcmp(char *s1, char *s2)
 	return (res);
 }
 
-/** _strcspn - searches a character in a string and returns the index
+/**
+ * _strcspsn - searches a character in a string and returns the index
  * @source: string to be searched
- * @char: character to search
+ * @s: character to search
+ * Return: index of character at position i;
  **/
 
 int _strcspsn(char *source, char s)
