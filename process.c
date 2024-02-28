@@ -12,7 +12,7 @@ void process(char **ptr, struct stat st)
 {
 	char *env[] = {"PATH:/bin", NULL};
 
-/**	if (S_ISDIR(st.st_mode))
+	if (S_ISDIR(st.st_mode))
 	{
 		if (chdir(ptr[0]) == -1)
 		{
@@ -21,8 +21,8 @@ void process(char **ptr, struct stat st)
 			exit(EXIT_FAILURE);
 		}
 	}
-**/
-/*	else */
+
+	else
 	{
 		if ((execve(ptr[0], ptr, env)) == -1)
 		{

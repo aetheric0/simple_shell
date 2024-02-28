@@ -11,12 +11,15 @@ char *_prompt(char **env)
 	FILE *stream = stdin;
 	char *lineptr = NULL;
 	size_t n = 0;
+	int _terminal = 0;
 
-	write(STDOUT_FILENO, "$ ", 2);
+	_terminal = isatty(fileno(stream));
+
+	if (_terminal)
+		write(STDOUT_FILENO, "$ ", 2);
 	if (getline(&lineptr, &n, stream) == -1)
 	{
 		free(lineptr);
-		write(1, "\n", 1);
 		exit(EXIT_SUCCESS);
 	}
 	lineptr[_strcspsn(lineptr, '\n')] = '\0';
@@ -34,6 +37,5 @@ char *_prompt(char **env)
 
 void sigint_handler(int signum)
 {
-	write(STDOUT_FILENO, "\n", 1);
 	exit(EXIT_SUCCESS);
 }
