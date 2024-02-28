@@ -2,45 +2,50 @@
 
 /**
  * _shell_loop - loops the shell for interactive shell
+ * @env: shell env macro
  **/
 
-void _shell_loop(void)
+void _shell_loop(char **env)
 {
 	pid_t my_pid;
 	int wstatus;
 	struct stat st;
 	char **ptr = NULL;
-	char *const env[] = {"PATH=/bin", NULL};
 
 	do {
-		ptr = _tokens();
+		ptr = _tokens(env);
 		if (stat(ptr[0], &st) == 0)
 		{
 			my_pid = fork();
-			if (my_pid == 0)
+			if (my_pid == -1)
 			{
-				if (S_ISDIR(st.st_mode))
-				{
-					if (chdir(ptr[0]) == -1)
-					{
-						perror("./hsh");
-						exit(EXIT_FAILURE);
-					}
-				}
-				else
-				{
-				     if ((execve(ptr[0], ptr, env)) == -1)
-					     perror("./hsh");
-				}
+				_free(ptr);
+				exit(EXIT_FAILURE);
 			}
+			else if (my_pid == 0)
+				process(ptr, st);
 		}
 		else
-		{
-			perror("stat");
-		}
+			perror("./hsh");
 
-		free(ptr);
+		_free(ptr);
 
 	} while (waitpid(my_pid, &wstatus, WUNTRACED));
 
+	_free(ptr);
+}
+
+/**
+ * _free - frees blocks of dynamically allocated memory
+ * both in inner and outer loop
+ * @ptr: address to dynamically allocated memory
+ **/
+
+void _free(char **ptr)
+{
+	int i;
+
+	for (i = 0; ptr[i] != NULL; i++)
+		free(ptr[i]);
+	free(ptr);
 }
