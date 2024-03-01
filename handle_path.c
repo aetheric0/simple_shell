@@ -13,7 +13,7 @@ char *_handle_path(char *command)
 	    || command[0] == '~')
 	{
 		if (access(command, F_OK) == 0)
-			return (strdup(command));
+			return (command);
 	}
 
 	else
