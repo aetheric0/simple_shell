@@ -8,25 +8,26 @@
  * @st: checks the PATH variable
  **/
 
-void process(char **ptr, struct stat st)
+void process(char *reg_command, struct stat st, char **ptr)
 {
-	char *env[] = {"PATH:/bin", NULL};
-
 	if (S_ISDIR(st.st_mode))
 	{
 		if (chdir(ptr[0]) == -1)
 		{
 			perror("./hsh");
+			free(reg_command);
 			free(ptr);
 			exit(EXIT_FAILURE);
 		}
 	}
-
 	else
 	{
-		if ((execve(ptr[0], ptr, env)) == -1)
+		if (execve(reg_command, ptr, NULL) == -1)
 		{
 			perror("./hsh");
+			free(reg_command);
+			free(ptr);
+			exit(EXIT_FAILURE);
 		}
 	}
 }

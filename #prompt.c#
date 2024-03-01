@@ -17,7 +17,7 @@ char *_prompt(char **env)
 
 	if (_terminal)
 		write(STDOUT_FILENO, "$ ", 2);
-	if (getline(&lineptr, &n, stream) == -1)
+	if (my_getline(&lineptr, &n, stream) == -1)
 	{
 		free(lineptr);
 		exit(EXIT_SUCCESS);

@@ -10,11 +10,12 @@
 
 int main(int ac, char **av, char **env)
 {
-	if (ac == 1 && av != NULL)
-	{
+	ac = 0;
+	if (av != NULL)
+		av++;
+	ac++;
 	signal(SIGINT, sigint_handler);
 	_shell_loop(env);
-	}
 
 	return (0);
 }

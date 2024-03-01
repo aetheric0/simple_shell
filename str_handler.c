@@ -49,9 +49,10 @@ int _strcspsn(char *source, char s)
 {
 	int i = 0;
 
-	while (source[i] != s)
+	while (source[i] != '\0')
 	{
-		i++;
+		if (source[i] != s)
+			i++;
 	}
 
 	return (i);

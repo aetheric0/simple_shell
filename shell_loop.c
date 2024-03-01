@@ -9,33 +9,39 @@ void _shell_loop(char **env)
 {
 	pid_t my_pid;
 	int wstatus;
+	char *reg_command = NULL;
 	struct stat st;
 	char **ptr = NULL;
 
 	do {
 		ptr = _tokens(env);
-		if (stat(ptr[0], &st) == 0)
+		if (ptr == NULL)
+		{
+			_free(ptr);
+			exit(EXIT_FAILURE);
+		}
+		reg_command = _handle_path(ptr[0]);
+		if (reg_command == NULL)
+		{
+			free(reg_command);
+			_free(ptr);
+			exit(EXIT_FAILURE);
+		}
+		if (stat(reg_command, &st) == 0)
 		{
 			my_pid = fork();
 			if (my_pid == -1)
 			{
+				free(reg_command);
 				_free(ptr);
 				exit(EXIT_FAILURE);
 			}
 			else if (my_pid == 0)
-				process(ptr, st);
+				process(reg_command, st, ptr);
 		}
 		else
 		{
-			if (ptr != NULL && ptr[0] != NULL)
-			{
-				if (strcmp(ptr[0], "env") == 0
-				    || strcmp(ptr[0], "printenv") == 0)
-				{
-					continue;
-				}
-				perror("./hsh");
-			}
+			perror("./hsh");
 		}
 
 		_free(ptr);

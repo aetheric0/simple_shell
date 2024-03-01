@@ -16,7 +16,7 @@ char **_tokens(char **env)
 	int pos = 0;
 	int string_count = 1;
 
-	if (string[i] == '\0')
+	if (string[i] == '\0' || (strspn(string, "\t\r ") == strlen(string)))
 	{
 		free(string);
 		return (_tokens(env));
