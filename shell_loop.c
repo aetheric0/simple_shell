@@ -40,12 +40,8 @@ void _shell_loop(char **env)
 				process(reg_command, st, ptr);
 		}
 		else
-		{
 			perror("./hsh");
-		}
-
 		_free(ptr);
-		free(reg_command);
 
 	} while (waitpid(my_pid, &wstatus, WUNTRACED));
 

@@ -30,4 +30,5 @@ void process(char *reg_command, struct stat st, char **ptr)
 			exit(EXIT_FAILURE);
 		}
 	}
+	free(reg_command);
 }
