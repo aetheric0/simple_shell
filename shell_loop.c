@@ -25,7 +25,7 @@ void _shell_loop(char **env)
 		{
 			free(reg_command);
 			_free(ptr);
-			exit(EXIT_FAILURE);
+			_shell_loop(env);
 		}
 		if (stat(reg_command, &st) == 0)
 		{

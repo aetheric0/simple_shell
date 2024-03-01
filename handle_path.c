@@ -6,6 +6,7 @@ char *_handle_path(char *command)
 	char *token = NULL;
 	size_t length, size;
 	char *path_copy = NULL;
+	char *reg_cmd_string = NULL;
 	char full_path[1024] = "";
 
 	path = getenv("PATH");
@@ -15,9 +16,6 @@ char *_handle_path(char *command)
 		if (access(command, F_OK) == 0)
 			return (command);
 	}
-
-	else
-	{
 		if (path == NULL)
 			return NULL;
 		length = _strlen(command);
@@ -40,13 +38,14 @@ char *_handle_path(char *command)
 			if (access(full_path, F_OK) == 0)
 			{
 				free(path_copy);
-				return (strdup(full_path));
-				free(path_copy);
+				reg_cmd_string = strdup(full_path);
+				return (reg_cmd_string);
 			}
-
 			token = strtok(NULL, ":");
 		}
 		free(path_copy);
-	}
-	return NULL;
+		perror("./hsh");
+		free(reg_cmd_string);
+
+		return (NULL);
 }
