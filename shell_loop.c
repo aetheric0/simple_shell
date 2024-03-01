@@ -45,6 +45,7 @@ void _shell_loop(char **env)
 		}
 
 		_free(ptr);
+		free(reg_command);
 
 	} while (waitpid(my_pid, &wstatus, WUNTRACED));
 
