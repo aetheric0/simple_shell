@@ -17,14 +17,13 @@ void _shell_loop(char **env)
 		ptr = _tokens(env);
 		if (ptr == NULL)
 		{
-			_free(ptr);
+			free(ptr);
 			exit(EXIT_FAILURE);
 		}
 		reg_command = _handle_path(ptr[0]);
 		if (reg_command == NULL)
 		{
 			free(reg_command);
-			_free(ptr);
 			_shell_loop(env);
 		}
 		if (stat(reg_command, &st) == 0)
@@ -33,19 +32,17 @@ void _shell_loop(char **env)
 			if (my_pid == -1)
 			{
 				free(reg_command);
-				_free(ptr);
 				exit(EXIT_FAILURE);
 			}
 			else if (my_pid == 0)
 				process(reg_command, st, ptr);
+			free(reg_command);
 		}
 		else
 			perror("./hsh");
 		_free(ptr);
 
 	} while (waitpid(my_pid, &wstatus, WUNTRACED));
-
-	_free(ptr);
 }
 
 /**

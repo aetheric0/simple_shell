@@ -44,7 +44,6 @@ char *_handle_path(char *command)
 			token = strtok(NULL, ":");
 		}
 		free(path_copy);
-		free(reg_cmd_string);
 		perror("./hsh");
 
 		return (NULL);
