@@ -43,6 +43,11 @@ free to remove it.
    ```
 3. Run the shell interactively or via piping as described above.
 
+4. It is advisable to use `Valgrind` to check for memory leaks with this commad:
+  ```
+  valgrind --leak-check=full --show-leak-kinds=all ./hsh
+  ```
+
 ## Contributing
 Contributions are welcome! If you find any issues or want to improve the shell,
 feel free to submit a pull request.
