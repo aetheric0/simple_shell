@@ -1,5 +1,8 @@
 ** Shell Project (hsh) - A Simple Unix Shell in C **
 
+![image](https://github.com/aetheric0/simple_shell/assets/125897342/8462d33d-149c-48c5-ba50-14dfc08cb937)
+
+
 # Shell Project (hsh) - A Simple Unix Shell in C
 
 ## Overview
