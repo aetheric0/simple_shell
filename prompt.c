@@ -28,7 +28,7 @@ char *_prompt(char **env)
 	if (strcmp(lineptr, "exit") == 0)
 	{
 		free(lineptr);
-		exit(EXIT_FAILURE);
+		exit(2);
 	}
 	return (lineptr);
 }
