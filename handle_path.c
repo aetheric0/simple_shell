@@ -1,7 +1,8 @@
 #include "main.h"
 
-char *_handle_path(char *command)
+char **_handle_path(char **env)
 {
+	char **command;
 	char *path = NULL;
 	char *token = NULL;
 	size_t length, size;
@@ -9,16 +10,17 @@ char *_handle_path(char *command)
 	char *reg_cmd_string = NULL;
 	char full_path[1024] = "";
 
+	command = _tokens(env);
 	path = getenv("PATH");
-	if (command[0] == '/' || command[0] == '.'
-	    || command[0] == '~')
+	if (*command[0] == '/' || *command[0] == '.'
+	    || *command[0] == '~')
 	{
-		if (access(command, F_OK) == 0)
+		if (access(*command, F_OK) == 0)
 			return (command);
 	}
 		if (path == NULL)
 			return NULL;
-		length = _strlen(command);
+		length = _strlen(command[0]);
 		path_copy = strdup(path);
 		token = strtok(path_copy, ":");
 
@@ -33,17 +35,23 @@ char *_handle_path(char *command)
 			}
 			strcpy(full_path, token);
 			strcat(full_path, "/");
-			strcat(full_path, command);
+			strcat(full_path, command[0]);
 
 			if (access(full_path, F_OK) == 0)
 			{
 				free(path_copy);
 				reg_cmd_string = strdup(full_path);
-				return (reg_cmd_string);
+				free(command[0]);
+				command[0] = NULL;
+				command[0] = reg_cmd_string;
+				return (command);
 			}
 			token = strtok(NULL, ":");
 		}
 		free(path_copy);
+		free(command[0]);
+		free(command);
+		command = NULL;
 		perror("./hsh");
 
 		return (NULL);

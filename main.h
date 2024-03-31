@@ -21,7 +21,7 @@ void process(char *, struct stat, char **);
 void _free(char **);
 void sigint_handler(int);
 void null_checker(char *);
-char *_handle_path(char *);
+char **_handle_path(char **);
 ssize_t my_getline(char **, size_t *, FILE *);
 
 /* String handlers */
