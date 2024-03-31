@@ -1,9 +1,7 @@
-** Shell Project (hsh) - A Simple Unix Shell in C **
-
-![image](https://github.com/aetheric0/simple_shell/assets/125897342/8462d33d-149c-48c5-ba50-14dfc08cb937)
-
-
 # Shell Project (hsh) - A Simple Unix Shell in C
+
+![image](https://github.com/aetheric0/simple_shell/assets/125897342/794b43e6-90e9-40c2-a202-babc7391f2c0)
+
 
 ## Overview
 This project implements a basic Unix shell in C. It allows users to execute
