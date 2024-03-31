@@ -26,7 +26,10 @@ char *_prompt(char **env)
 	if (strcmp(lineptr, "env") == 0 || strcmp(lineptr, "printenv") == 0)
 		printenv(env);
 	if (strcmp(lineptr, "exit") == 0)
+	{
+		free(lineptr);
 		exit(EXIT_SUCCESS);
+	}
 	return (lineptr);
 }
 
